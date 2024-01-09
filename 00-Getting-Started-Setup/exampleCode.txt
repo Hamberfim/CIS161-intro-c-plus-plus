@@ -1,0 +1,11 @@
+// A simple C++ program
+// Joe Struss, January 2020, jastruss@dmacc.edu
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hello World!" << endl;
+    system("pause");
+    return 0;
+}
