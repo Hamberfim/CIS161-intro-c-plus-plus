@@ -2,4 +2,4 @@
 ### Intro to C++
 Intro C++ course with Dr Belinda Patton - Spring 2024
 <br />
-Private repo for course work.
+Repo for course work.
