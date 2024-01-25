@@ -1,8 +1,0 @@
-# ninja log v5
-3	265	7279240102544075	debugginInQt_autogen/timestamp	82a54cafbaa5c804
-3	265	7279240102544075	debugginInQt_autogen/mocs_compilation.cpp	82a54cafbaa5c804
-3	265	7279240102544075	C:/Users/adhamlin/Documents/GitHub/_Spring_2024_DMACC_/CIS161-intro-c-plus-plus/02_Module/GitHub_and_Debugging/build-debugginInQt-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/debugginInQt_autogen/timestamp	82a54cafbaa5c804
-3	265	7279240102544075	C:/Users/adhamlin/Documents/GitHub/_Spring_2024_DMACC_/CIS161-intro-c-plus-plus/02_Module/GitHub_and_Debugging/build-debugginInQt-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/debugginInQt_autogen/mocs_compilation.cpp	82a54cafbaa5c804
-267	331	7279240103593367	CMakeFiles/debugginInQt.dir/debugginInQt_autogen/mocs_compilation.cpp.obj	8eb9c31031f6b47
-271	615	7279240106461249	CMakeFiles/debugginInQt.dir/main.cpp.obj	b94fba3546750762
-622	944	7279240109555662	debugginInQt.exe	439289a5edfd923f
