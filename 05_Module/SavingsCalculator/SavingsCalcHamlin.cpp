@@ -19,35 +19,83 @@
  *      5616
  *      8765.28
  *      12166.50
+ *      ...
  *      Enter name (q to quit): q
  *      bye
  */
+#include <iomanip> // std::setprecision
 #include <iostream>
-#include <string>
 using namespace std;
 
 int main(void) {
-  // string name;
-  double savingsRate = 0.05;
-  double salary = 50000;
+  string name;
+  double savingsRate;
+  double salary;
   double accountValue;
 
-  //   cout << "Enter name (q to quit): " << endl;
+  // loop control
+  bool again = true;
 
-  //   cout << "Enter savings rate: " << endl;
+  cout << "Enter name (q to quit): " << endl;
+  cin >> name;
+  do {
+    // check for quit and validate numeric input
+    if (name == "q" || name == "Q") {
+      break;
+    } else {
+      cout << "Enter savings rate (0.xx i.e., 0.04): " << endl;
+      cin >> savingsRate;
+      // Not the scope of this assignemtn but...
+      // FIX LATER: how to validate if user inputs alpha chars
+      // validate, check for zero value |
+      while (savingsRate <= 0) {
+        cout << "Savings rate must be greater than zero, enter savings rate "
+                "(0.xx i.e., 0.04): "
+             << endl;
+        cin >> savingsRate;
+      };
 
-  //   cout << "Enter salary: " << endl;
+      cout << "Enter salary: " << endl;
+      cin >> salary;
+      // validate, check for zero value
+      while (salary <= 0) {
+        cout << "Salary must be greater than zero, enter salary: " << endl;
+        cin >> salary;
+      };
 
-  //   cout << "The account values for " << name << " are: " << endl;
+      cout << "\n=========================" << endl;
+      cout << "The account values for " << name << " are: " << endl;
 
-  // test calculation
-  accountValue = (savingsRate * salary) * 1.08;
-  cout << accountValue << endl;
-  accountValue = (accountValue + savingsRate * salary) * 1.08;
-  cout << accountValue << endl;
-  accountValue = (accountValue + savingsRate * salary) * 1.08;
-  cout << accountValue << endl;
-  accountValue = (accountValue + savingsRate * salary) * 1.08;
-  cout << accountValue << endl;
+      // Ten Year Calculations
+      accountValue = (savingsRate * salary) * 1.08; // initial value- year 1
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 2
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 3
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 4
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 5
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 6
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 7
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 8
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 9
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+      accountValue = (accountValue + savingsRate * salary) * 1.08; // year 10
+      cout << fixed << setprecision(2) << "$" << accountValue << endl;
+    }
+    cout << "\nEnter name (q to quit): " << endl;
+    cin >> name;
+    // check for quit
+    if (name == "q" || name == "Q") {
+      again = false;
+    }
+  } while (again);
+
+  cout << "bye" << endl;
   return 0;
 }
