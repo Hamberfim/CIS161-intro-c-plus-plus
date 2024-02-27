@@ -37,34 +37,76 @@ int main(void) {
   double interestRate;
   int timesCompounded;
   double inSavings;
-  // bool again = true;
 
-  // user input/data capture
-  cout << "Enter principal: " << endl;
+  // loop control
+  bool again = true;
+
+  // TO FIX: How to validate so an alpha can't be used.
+  // initial prompt into loop
+  cout << "Enter principal: (or -1 to quit)" << endl;
   cin >> principal;
-  cout << "Enter interest rate (as percent): " << endl;
-  cin >> interestRate;
-  cout << "Enter number of times compounded: " << endl;
-  cin >> timesCompounded;
+  do {
+    // capture user input
+    if (principal == -1) {
+      break;
+    } else {
+      while (principal <= 0) {
+        cout << "Principal be a number greater than zero, enter principal: "
+             << endl;
+        cin >> principal;
+      }
 
-  // calculation
-  inSavings = principal * pow((1 + (interestRate / 100) / timesCompounded),
-                              timesCompounded);
-  cout << endl;
-  // output/display
-  cout << fixed << setprecision(2) << right;
+      cout << "Enter interest rate (as percent): " << endl;
+      cin >> interestRate;
+      while (interestRate <= 0) {
+        cout << "Interest rate must be a number greater than zero, enter "
+                "interest rate "
+                "(as "
+                "percent): "
+             << endl;
+        cin >> interestRate;
+      }
 
-  cout << setw(20) << left << "Interest Rate: ";
-  cout << setw(9) << right << interestRate << "%" << endl;
+      cout << "Enter number of times compounded: " << endl;
+      cin >> timesCompounded;
+      while (timesCompounded < 1) {
+        cout << "Number of compound times must be a number greater than zero, "
+                "enter "
+                "number of times compounded: "
+             << endl;
+        cin >> timesCompounded;
+      }
 
-  cout << setw(20) << left << "Times Compounded: ";
-  cout << setw(10) << right << timesCompounded << endl;
+      // calculation
+      inSavings = principal * pow((1 + (interestRate / 100) / timesCompounded),
+                                  timesCompounded);
+      // space in output
+      cout << endl;
 
-  cout << setw(20) << left << "Principal:         $";
-  cout << setw(10) << right << principal << endl;
+      // output/display
+      cout << fixed << setprecision(2) << right;
 
-  cout << setw(20) << left << "Amount in Savings: $";
-  cout << setw(10) << right << inSavings << endl;
+      cout << setw(20) << left << "Interest Rate: ";
+      cout << setw(9) << right << interestRate << "%" << endl;
+
+      cout << setw(20) << left << "Times Compounded: ";
+      cout << setw(10) << right << timesCompounded << endl;
+
+      cout << setw(20) << left << "Principal:         $";
+      cout << setw(10) << right << principal << endl;
+
+      cout << setw(20) << left << "Amount in Savings: $";
+      cout << setw(10) << right << inSavings << endl;
+    }
+    cout << "\nEnter principal: (or -1 to quit)" << endl;
+    cin >> principal;
+    // check for quit
+    if (principal == -1) {
+      again = false;
+    }
+  } while (again);
+
+  cout << "Exiting, bye." << endl;
 
   return 0;
 }
