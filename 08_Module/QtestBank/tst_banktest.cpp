@@ -1,0 +1,106 @@
+#include <iostream>
+using namespace std;
+
+double balance;
+
+void init()
+{
+    balance = 0;
+}
+
+void deposit(double amount)
+{
+    if (amount <= 0) {
+        return;
+    }
+    balance += amount;
+}
+
+void withdraw(double amount)
+{
+    if (amount <= 0 || amount > balance) {
+        return;
+    }
+    balance -= amount;
+}
+
+#include <QtTest>
+
+// add necessary includes here
+
+class BankTest : public QObject
+{
+    Q_OBJECT
+
+public:
+    BankTest();
+    ~BankTest();
+
+private slots:
+    void test_deposit();
+    void test_deposit_negative();
+    void test_withdraw();
+    void test_withdraw_negative();
+    void test_withdraw_overdraft();
+};
+
+BankTest::BankTest() {}
+
+BankTest::~BankTest() {}
+
+void BankTest::test_deposit()
+{
+    init();
+    // test the deposit
+    deposit(100.00);
+
+    // QCOMPARE(actual, Expected;)
+    QCOMPARE(balance, 100.00);
+}
+
+void BankTest::test_deposit_negative()
+{
+    init();
+    // test the deposit
+    deposit(-100.00);
+
+    // QCOMPARE(actual, Expected);
+    QCOMPARE(balance, 0);
+}
+
+void BankTest::test_withdraw()
+{
+    init();
+    deposit(100.00); // add to the balance
+    // test the withdraw
+    withdraw(10.00);
+
+    // QCOMPARE(actual, Expected);
+    QCOMPARE(balance, 90.00);
+}
+
+void BankTest::test_withdraw_negative()
+{
+    init();
+    deposit(100.00); // add to the balance
+    // test the withdraw
+    withdraw(-50.00);
+
+    // QCOMPARE(actual, Expected);
+    QCOMPARE(balance, 100.00);
+}
+
+void BankTest::test_withdraw_overdraft()
+{
+    init();
+    deposit(100.00); // add to the balance
+    // test the withdraw
+    withdraw(110.00);
+
+    // QCOMPARE(actual, Expected);
+    QCOMPARE(balance, 100.00);
+}
+
+QTEST_APPLESS_MAIN(BankTest)
+
+#include "tst_banktest.moc"
