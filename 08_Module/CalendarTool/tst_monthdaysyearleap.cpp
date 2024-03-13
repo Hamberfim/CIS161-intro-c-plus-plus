@@ -41,9 +41,15 @@ void init()
     december = 31;
 }
 
-// user function to prompt for year and month
-
 // FUNCTIONS TO TEST WRITTEN BY PROGRAMER
+
+// one function to take user input
+
+// one function to determine if a users input is valid
+
+// one function to determine if the year is a leap year.
+
+// one function to calculate the number of days in a month
 
 // TDD TEST FRAMEWORK SECTION STARTS
 #include <QtTest>
