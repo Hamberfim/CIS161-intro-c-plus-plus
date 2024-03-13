@@ -1,1 +1,14 @@
+Main Manual:  
+https://doc.qt.io/qtcreator/index.html (3/2024)
+
+
+Testing:
 https://doc.qt.io/qt-6/testing-and-debugging.html (3/2024)
+
+https://doc.qt.io/qt-6/qttest-index.html (3/2024)
+
+https://doc.qt.io/qt-6/qtquicktest-index.html (3/2024)
+
+https://doc.qt.io/qt-6/qtest-tutorial.html (3/2024)
+
+https://doc.qt.io/qtcreator/creator-autotest.html (3/2024)
