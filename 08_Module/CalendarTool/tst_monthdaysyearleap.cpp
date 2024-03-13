@@ -22,30 +22,32 @@
 
 // preprocessors
 #include <iostream>
+using std::cerr;
 using std::cin;
 using std::cout;
 using std::endl;
+using std::string;
 
 // DECLARE AND INITIALIZED VARIABLES
-int year, month, days, january, febuary, march, april, may, june, july, august, september, october,
-    november, december;
+int year, month, days;
+string months[] = {"January",
+                   "Febuary",
+                   "March",
+                   "April",
+                   "May",
+                   "June",
+                   "July",
+                   "August",
+                   "September",
+                   "October",
+                   "November",
+                   "December"};
 void init()
 {
     // set month/year/day int values
     month = 0;
     year = 0;
-    january = 31;
-    febuary = 28; // add one day on leap year
-    march = 31;
-    april = 30;
-    may = 31;
-    june = 30;
-    july = 31;
-    august = 31;
-    september = 30;
-    october = 31;
-    november = 30;
-    december = 31;
+    days = 0;
 }
 
 // FUNCTIONS TO TEST WRITTEN BY PROGRAMER
@@ -56,16 +58,30 @@ int GetYear()
 {
     cout << "===== Determine if a Year is a Leap Year =====" << endl;
     cout << "===== and how many Days in a Month =====" << endl;
-    cout << "Enter a year: " << endl;
+    cout << "Enter a year (1582 - 9999): " << endl;
     cin >> year;
+    while (!cin) {
+        cerr << "Error! Invalid input. Try again." << endl;
+        cin.clear();
+        cin.ignore();
+        cout << "Enter a year (1582 - 9999): " << endl;
+        cin >> year;
+    }
 
     return year;
 }
 
 int GetMonth()
 {
-    cout << "Enter a month as a numeric value (Jan.= 1, Feb.= 2, etc.) :" << endl;
+    cout << "Enter a month as a numeric value (Jan.= 1, Feb.= 2, i.e., 1-12) :" << endl;
     cin >> month;
+    while (!cin) {
+        cerr << "Error! Invalid input. Try again." << endl;
+        cin.clear();
+        cin.ignore();
+        cout << "Enter a month as a numeric value (Jan.= 1, Feb.= 2, i.e., 1-12) :" << endl;
+        cin >> month;
+    }
 
     return month;
 }
@@ -99,41 +115,40 @@ bool is_leap_year(int year)
 // one function to calculate the number of days in a month
 int number_of_day_in_month(int month, int year)
 {
-    int numOfDays = 0;
     bool isleap;
 
     if (month == 1) {
-        numOfDays = january;
+        days = 31;
     } else if (month == 2) {
         isleap = is_leap_year(year);
         if (isleap) {
-            numOfDays = febuary + 1;
+            days = 29;
         } else {
-            numOfDays = febuary;
+            days = 28;
         }
     } else if (month == 3) {
-        numOfDays = march;
+        days = 31;
     } else if (month == 4) {
-        numOfDays = april;
+        days = 30;
     } else if (month == 5) {
-        numOfDays = may;
+        days = 31;
     } else if (month == 6) {
-        numOfDays = june;
+        days = 30;
     } else if (month == 7) {
-        numOfDays = july;
+        days = 31;
     } else if (month == 8) {
-        numOfDays = august;
+        days = 31;
     } else if (month == 9) {
-        numOfDays = september;
+        days = 20;
     } else if (month == 10) {
-        numOfDays = october;
+        days = 31;
     } else if (month == 11) {
-        numOfDays = november;
+        days = 30;
     } else if (month == 12) {
-        numOfDays = december;
+        days = 31;
     }
 
-    return numOfDays;
+    return days;
 }
 
 // TDD TEST FRAMEWORK SECTION STARTS
@@ -257,7 +272,23 @@ QTEST_APPLESS_MAIN(MonthDaysYearLeap)
 // comment out QTEST_APPLESS_MAIN(BankTest) to run application rather than tests, change notmain() to main()
 int notmain()
 {
-    // will call the tested function from here
+    bool isLeap;
+    // call for input
+    year = GetYear();
+    month = GetMonth();
+
+    // is year a leap year
+    isLeap = is_leap_year(year);
+
+    // // how many days in the month
+    days = number_of_day_in_month(month, year);
+
+    string leap = (isLeap) ? " TRUE" : " FALSE";
+
+    // // display
+    cout << "Is the year " << year << " a leap year?" << leap << "...and " << months[month - 1]
+         << " of that years has " << days << " days." << endl;
+
     return 0;
 }
 
