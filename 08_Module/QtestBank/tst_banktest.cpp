@@ -1,29 +1,38 @@
 #include <iostream>
-using namespace std;
+using std::cout;
+using std::endl;
 
+// declare a balance variable
 double balance;
 
+// simulate call to get current account balance
 void init()
 {
+    // initialize the balance variable to zero
     balance = 0;
 }
 
-void deposit(double amount)
+// deposit function
+double deposit(double amount)
 {
+    // refactor based on tests
     if (amount <= 0) {
-        return;
+        return balance;
     }
-    balance += amount;
+    return balance += amount;
 }
 
-void withdraw(double amount)
+// withdraw function
+double withdraw(double amount)
 {
+    // refactor based on tests
     if (amount <= 0 || amount > balance) {
-        return;
+        return balance;
     }
-    balance -= amount;
+    return balance -= amount;
 }
 
+// TESTING CODE SECTION
 #include <QtTest>
 
 // add necessary includes here
@@ -48,6 +57,7 @@ BankTest::BankTest() {}
 
 BankTest::~BankTest() {}
 
+// TDD TEST DEFINED BY PROGRAMMER
 void BankTest::test_deposit()
 {
     init();
@@ -101,6 +111,22 @@ void BankTest::test_withdraw_overdraft()
     QCOMPARE(balance, 100.00);
 }
 
+// MAIN() FOR TESTING ENV/Framework
 QTEST_APPLESS_MAIN(BankTest)
+
+// comment out QTEST_APPLESS_MAIN(BankTest) to run application rather than tests, change notmain() to main()
+int notmain()
+{
+    /* account balance initialized to zero via init() function above */
+    // attempt deposit
+    deposit(100.00);
+    cout << "Current Balance: " << balance << endl;
+
+    // attempt withdraw
+    withdraw(10.00);
+    cout << "Current Balance: " << balance << endl;
+
+    return 0;
+}
 
 #include "tst_banktest.moc"
