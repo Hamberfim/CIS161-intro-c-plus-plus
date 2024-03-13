@@ -20,12 +20,19 @@
  *  August - 31 days, September - 30 days, October - 31 days, November - 30 days, December - 31 days
  */
 
+// preprocessors
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
 // DECLARE AND INITIALIZED VARIABLES
-int year, january, febuary, march, april, may, june, july, august, september, october, november,
-    december;
+int year, month, days, january, febuary, march, april, may, june, july, august, september, october,
+    november, december;
 void init()
 {
-    // set year day values
+    // set month/year/day int values
+    month = 0;
     year = 0;
     january = 31;
     febuary = 28; // add one day on leap year
@@ -42,14 +49,92 @@ void init()
 }
 
 // FUNCTIONS TO TEST WRITTEN BY PROGRAMER
+/* one function to take user input - 
+ * Seems odd to require this. Isn't this where you would mock for input for the other four test?
+ * Plus there doesn't seem to be console access for input during a test run, though there is during debug with some test showing in console */
+int GetYear()
+{
+    cout << "===== Determine if a Year is a Leap Year =====" << endl;
+    cout << "===== and how many Days in a Month =====" << endl;
+    cout << "Enter a year: " << endl;
+    cin >> year;
 
-// one function to take user input
+    return year;
+}
+
+int GetMonth()
+{
+    cout << "Enter a month as a numeric value (Jan.= 1, Feb.= 2, etc.) :" << endl;
+    cin >> month;
+
+    return month;
+}
 
 // one function to determine if a users input is valid
+bool validate_user_input(int year, int month)
+{
+    bool isValid = false;
+    // assuming the stating year of the Gregorian calendar (1582)
+    if ((year >= 1582 && year < 10000) && (month > 0 && month < 13)) {
+        isValid = true;
+    }
+
+    return isValid;
+}
 
 // one function to determine if the year is a leap year.
+bool is_leap_year(int year)
+{
+    if (year % 400 == 0) {
+        return true;
+    } else if (year % 100 == 0) {
+        return false;
+    } else if (year % 4 == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 // one function to calculate the number of days in a month
+int number_of_day_in_month(int month, int year)
+{
+    int numOfDays = 0;
+    bool isleap;
+
+    if (month == 1) {
+        numOfDays = january;
+    } else if (month == 2) {
+        isleap = is_leap_year(year);
+        if (isleap) {
+            numOfDays = febuary + 1;
+        } else {
+            numOfDays = febuary;
+        }
+    } else if (month == 3) {
+        numOfDays = march;
+    } else if (month == 4) {
+        numOfDays = april;
+    } else if (month == 5) {
+        numOfDays = may;
+    } else if (month == 6) {
+        numOfDays = june;
+    } else if (month == 7) {
+        numOfDays = july;
+    } else if (month == 8) {
+        numOfDays = august;
+    } else if (month == 9) {
+        numOfDays = september;
+    } else if (month == 10) {
+        numOfDays = october;
+    } else if (month == 11) {
+        numOfDays = november;
+    } else if (month == 12) {
+        numOfDays = december;
+    }
+
+    return numOfDays;
+}
 
 // TDD TEST FRAMEWORK SECTION STARTS
 #include <QtTest>
@@ -66,7 +151,9 @@ public:
 
     // DECLARE TEST FUNCTION PROTOTYPES HERE
 private slots:
-    void test_case1();
+    void test_validate_user_input();
+    void test_is_leap_year();
+    void test_number_of_day_in_month();
 };
 
 MonthDaysYearLeap::MonthDaysYearLeap() {}
@@ -74,7 +161,94 @@ MonthDaysYearLeap::MonthDaysYearLeap() {}
 MonthDaysYearLeap::~MonthDaysYearLeap() {}
 
 // TDD TEST WRITTEN BY PROGRAMER
-void MonthDaysYearLeap::test_case1() {}
+void MonthDaysYearLeap::test_validate_user_input()
+{
+    // initialize vars
+    init();
+    bool validity;
+
+    // TRUE
+    // normally call user input function calls
+    year = 1966; // mocked for TRUE
+    month = 4;   // mocked for TRUE
+    validity = validate_user_input(year, month);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(validity, true);
+
+    // TRUE/FALSE
+    year = 1966; // mocked for TRUE
+    month = 18;  // mocked for FALSE
+    validity = validate_user_input(year, month);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(validity, false);
+    // FALSE/TRUE
+    year = 11000; // mocked for FALSE
+    month = 10;   // mocked for TRUE
+    validity = validate_user_input(year, month);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(validity, false);
+    // FALSE/FLASE
+    year = 11000; // mocked for FALSE
+    month = -1;   // mocked for FALSE
+    validity = validate_user_input(year, month);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(validity, false);
+}
+
+void MonthDaysYearLeap::test_is_leap_year()
+{
+    // initialize vars
+    init();
+    bool validity;
+
+    // TRUE
+    // normally function calls
+    year = 2012; // mocked for TRUE
+    validity = is_leap_year(year);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(validity, true);
+
+    // FALSE
+    // normally  function calls
+    year = 1900; // mocked for FALSE
+    validity = is_leap_year(year);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(validity, false);
+}
+
+void MonthDaysYearLeap::test_number_of_day_in_month()
+{
+    // assumption is that since user input is validated first, all variable values are good/true or return zero
+    // initialize vars
+    init();
+    // mock for April
+    month = 4;
+    year = 0;
+    days = number_of_day_in_month(month, year);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(days, 30);
+
+    // mock for feb not a leap year
+    month = 2;
+    year = 1900; // only call on feb
+    days = number_of_day_in_month(month, year);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(days, 28);
+
+    // mock for feb on leap year
+    month = 2;
+    year = 2024; // only call on feb
+    days = number_of_day_in_month(month, year);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(days, 29);
+
+    // mock for no match
+    month = 13;
+    year = 0;
+    days = number_of_day_in_month(month, year);
+    // QCOMPARE(actual, expected;)
+    QCOMPARE(days, 0);
+}
 
 // TDD TEST FRAMEWORK's MAIN()
 QTEST_APPLESS_MAIN(MonthDaysYearLeap)
