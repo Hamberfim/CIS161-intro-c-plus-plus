@@ -25,6 +25,10 @@
     "*.rexx": "rexx",
     "algorithm": "cpp",
     "limits": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "*.tcc": "cpp",
+    "ostream": "cpp",
+    "typeinfo": "cpp",
+    "string_view": "cpp"
   }
 }

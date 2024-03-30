@@ -11,7 +11,7 @@
  *     C1     C2      C3
  *  |  M1  |  M2   |  M3  |
  *  -----------------------
- *  |[0][0]||[0][1]|[0][2]| ROW-0
+ *  |[0][0]||[0][1]|[0][2]| ROW-0 --day 1
  *  -----------------------
  *  |[1][0]||[1][1]|[1][2]| ROW-1
  *  -----------------------
@@ -53,48 +53,67 @@ using std::numeric_limits;
 using std::setprecision;
 using std::streamsize;
 
+// global vars
+const int MONKEY_COUNT = 3;
+const int DAY_COUNT = 7;
+
 // functions
 // average amount eaten by all
-double AverageAmount() {}
+double AverageAmount(double foodArray[][DAY_COUNT]) {
+  double totalFood = 0.0;
+  double average;
+  int numOfEntries = MONKEY_COUNT * DAY_COUNT;
+  for (unsigned int i = 0; i < MONKEY_COUNT; i++) {
+    for (unsigned int j = 0; j < DAY_COUNT; j++) {
+      totalFood += foodArray[i][j];
+    }
+  }
+  average = totalFood / numOfEntries;
+  return average;
+}
 
-// least amount eaten by one
-double LeastAmount() {}
+// // least amount eaten by one
+// double LeastAmount() {}
 
-// greatest amount eaten by one
-double GreatestAmount() {}
+// // greatest amount eaten by one
+// double GreatestAmount() {}
 
 int main(void) {
   // vars
-  const int MONKEY_COUNT = 3;
-  const int DAY_COUNT = 7;
-
-  double averageFoodEatenByAll;
-  double leastFoodEatenByOne;
-  double mostFoodEatenByOne;
   double foodAmount;
+  double averageFoodEatenByAll;
+  //   double leastFoodEatenByOne;
+  //   double mostFoodEatenByOne;
 
   // array table
   double foodArray[MONKEY_COUNT][DAY_COUNT]; // 3 monkeys, 7 days of the week
 
   // prompt user for data on each monkey
-  for (unsigned int i = 0; i < MONKEY_COUNT; i++) {
-    cout << "Enter the amount of food for monkey" << i + 1
-         << " in pounds: " << endl;
-    cin >> foodAmount;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    while (!cin) {
-      cerr << "Error! Food amount must be a numeric value (i.e., 2.3)." << endl;
-      cin.clear();
-      cout << "Enter the amount of food for monkey" << i + 1
-           << " in pounds: " << endl;
+  for (int i = 0; i < MONKEY_COUNT; ++i) {
+    cout << "Enter amount of food in pounds for monkey " << i + 1 << " :"
+         << endl;
+    for (int j = 0; j < DAY_COUNT; ++j) {
+      cout << "Food for Monkey " << i + 1 << ", day " << j + 1 << endl;
+
       cin >> foodAmount;
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-    // populate array input
-    for (unsigned int j = 0; j < DAY_COUNT; j++) {
+
+      while (cin.fail()) {
+        cerr << "ERROR! Input must be a number." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "Food for Monkey " << i + 1 << ", day " << j + 1 << endl;
+        cin >> foodAmount;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      }
+
       foodArray[i][j] = foodAmount;
     }
   }
+
+  // gather data
+  averageFoodEatenByAll = AverageAmount(foodArray);
 
   // display
   // Average amount of food eaten per day by all of monkeys.
@@ -102,6 +121,20 @@ int main(void) {
   // greatest amount of food eaten during the week by any one monkey.
 
   cout << "=========== Monkey Feeding Data ===========" << endl;
+
+  // testing output
+  // monkey 1
+  cout << foodArray[0][0] << " ";
+  cout << foodArray[0][1] << " ";
+  cout << foodArray[0][2] << endl;
+
+  cout << foodArray[1][0] << " ";
+  cout << foodArray[1][1] << " ";
+  cout << foodArray[1][2] << endl;
+
+  cout << foodArray[2][0] << " ";
+  cout << foodArray[2][1] << " ";
+  cout << foodArray[2][2] << endl;
 
   return 0;
 }
