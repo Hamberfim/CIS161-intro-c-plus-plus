@@ -29,6 +29,7 @@
     "*.tcc": "cpp",
     "ostream": "cpp",
     "typeinfo": "cpp",
-    "string_view": "cpp"
+    "string_view": "cpp",
+    "iomanip": "cpp"
   }
 }

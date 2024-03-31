@@ -49,6 +49,8 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::fixed;
+using std::max;
+using std::min;
 using std::numeric_limits;
 using std::setprecision;
 using std::streamsize;
@@ -73,17 +75,35 @@ double AverageAmount(double foodArray[][DAY_COUNT]) {
 }
 
 // // least amount eaten by one
-// double LeastAmount() {}
+double LeastAmount(double foodArray[][DAY_COUNT]) {
+  // set min amount
+  double leastAmount = foodArray[0][0];
+  for (unsigned int i = 0; i < MONKEY_COUNT; i++) {
+    for (unsigned int j = 0; j < DAY_COUNT; j++) {
+      leastAmount = min(leastAmount, foodArray[i][j]);
+    }
+  }
+  return leastAmount;
+}
 
 // // greatest amount eaten by one
-// double GreatestAmount() {}
+double GreatestAmount(double foodArray[][DAY_COUNT]) {
+  // set max
+  double greatestAmount = foodArray[0][0];
+  for (unsigned int i = 0; i < MONKEY_COUNT; i++) {
+    for (unsigned int j = 0; j < DAY_COUNT; j++) {
+      greatestAmount = max(greatestAmount, foodArray[i][j]);
+    }
+  }
+  return greatestAmount;
+}
 
 int main(void) {
   // vars
   double foodAmount;
   double averageFoodEatenByAll;
-  //   double leastFoodEatenByOne;
-  //   double mostFoodEatenByOne;
+  double leastFoodEatenByOne;
+  double mostFoodEatenByOne;
 
   // array table
   double foodArray[MONKEY_COUNT][DAY_COUNT]; // 3 monkeys, 7 days of the week
@@ -114,27 +134,36 @@ int main(void) {
 
   // gather data
   averageFoodEatenByAll = AverageAmount(foodArray);
+  leastFoodEatenByOne = LeastAmount(foodArray);
+  mostFoodEatenByOne = GreatestAmount(foodArray);
 
   // display
-  // Average amount of food eaten per day by all of monkeys.
-  // least amount of food eaten during the week by any one monkey
-  // greatest amount of food eaten during the week by any one monkey.
-
   cout << "=========== Monkey Feeding Data ===========" << endl;
+  // Average amount of food eaten per day by all of monkeys.
+  cout << "The average amount of food eaten per day by all of monkeys: "
+       << fixed << setprecision(2) << averageFoodEatenByAll << "lbs." << endl;
+  // least amount by one monkey
+  cout << "The least amount of food eaten during the week by any one monkey: "
+       << fixed << setprecision(2) << leastFoodEatenByOne << "lbs." << endl;
+  // greatest amount eaten by one monkey.
+  cout
+      << "The greatest amount of food eaten during the week by any one monkey: "
+      << fixed << setprecision(2) << mostFoodEatenByOne << "lbs.\n"
+      << endl;
 
   // testing output
   // monkey 1
-  cout << foodArray[0][0] << " ";
-  cout << foodArray[0][1] << " ";
-  cout << foodArray[0][2] << endl;
-
-  cout << foodArray[1][0] << " ";
-  cout << foodArray[1][1] << " ";
-  cout << foodArray[1][2] << endl;
-
-  cout << foodArray[2][0] << " ";
-  cout << foodArray[2][1] << " ";
-  cout << foodArray[2][2] << endl;
+  //   cout << foodArray[0][0] << " ";
+  //   cout << foodArray[0][1] << " ";
+  //   cout << foodArray[0][2] << endl;
+  //   // monkey 2
+  //   cout << foodArray[1][0] << " ";
+  //   cout << foodArray[1][1] << " ";
+  //   cout << foodArray[1][2] << endl;
+  //   // monkey 3
+  //   cout << foodArray[2][0] << " ";
+  //   cout << foodArray[2][1] << " ";
+  //   cout << foodArray[2][2] << endl;
 
   return 0;
 }
