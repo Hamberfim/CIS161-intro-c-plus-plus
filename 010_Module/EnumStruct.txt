@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+enum SemesterOfYear{
+    Fall, Spring, Summer
+};
+
+struct Date
+{
+    SemesterOfYear semesterOfYear = Fall;
+    int year = 1901;
+};
+
+string convertSemesterToString (SemesterOfYear semester)
+{
+    switch (semester)
+    {
+ 
+        case Fall:
+        return "Fall";
+ 
+        case Spring:
+        return "Spring";
+ 
+        case Summer:
+        return "Summer";
+ 
+        default:
+        return "Unknown";
+ 
+    }
+}
+
+int main()
+{
+    Date semester;
+    int semesterInput;
+    
+    cout << "Enter the semester: ";
+    cin>> semesterInput;
+
+    cout << "Enter the semester year: ";
+    cin >> semester.year;
+    
+    SemesterOfYear semesterEnum = static_cast<SemesterOfYear>(semesterInput);
+
+    string semesterString = convertSemesterToString(semesterEnum);
+    
+    cout << semesterString << ": " <<semester.year << endl;
+    return 0;
+}
