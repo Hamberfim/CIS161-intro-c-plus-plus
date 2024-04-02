@@ -1,0 +1,55 @@
+Classes intro: Public member functions
+The class construct defines a new type that can group data and functions to form an object. A class' public member functions indicate all operations a class user can perform on the object. The power of classes is that a class user need not know how the class' data and functions are implemented, but need only understand how each public member function behaves. The animation below shows a class' public member function declarations only; the remainder of the class definition is discussed later.
+
+
+class Restaurant {                          // Info about a restaurant   
+   public:                                          
+      void SetName(string restaurantName);  // Sets the restaurant's name              
+      void SetRating(int userRating);       // Sets the rating (1-5, with 5 best)      
+      void Print();                         // Prints name and rating on one line   
+
+   ...
+};
+
+Restaurant favPlace;
+
+favPlace.SetName("Central Deli");
+favPlace.SetRating(4);
+favPlace.Print();
+
+========================================================================================
+
+Using a class
+A programmer can create one or more objects of the same class. Declaring a variable of a class type creates an object of that type. Ex: Restaurant favLunchPlace; declares a Restaurant object named favLunchPlace.
+
+The "." operator, known as the member access operator, is used to invoke a function on an object. Ex: favLunchPlace.SetRating(4) calls the SetRating() function on the favLunchPlace object, which sets the object's rating to 4.
+
+int main() {
+   Restaurant favLunchPlace;
+   Restaurant favDinnerPlace;
+
+   favLunchPlace.SetName("Central Deli");
+   favLunchPlace.SetRating(4);
+
+   favDinnerPlace.SetName("Friends Cafe");
+   favDinnerPlace.SetRating(5);
+
+   cout << "My favorite restaurants: " << endl;
+   favLunchPlace.Print();
+   favDinnerPlace.Print();
+
+   return 0;
+}
+
+=========================================================================================
+
+Class example: string
+C++'s string type is a class. The string class stores a string's characters in memory, along with variables indicating the length and other things, but a string's user need not know such details. Instead, the string's user just needs to know what public member functions can be used, such as those shown below. (Note: size_t is an unsigned integer type).
+
+Figure 10.4.1: Some string public member functions (many more exist).
+
+char& at(size_t pos); // Returns a reference to the character at position pos in the string.
+
+size_t length() const; // Returns the number of characters in the string
+
+void push_back(char c); // Appends character c to the string's end (increasing length by 1).

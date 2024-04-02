@@ -1,0 +1,16 @@
+The programmer uses a struct to define and use a new type as follows.
+
+struct StructTypeName {
+   type item1;
+   type item2;
+   ...
+   type itemN;      
+};
+
+...
+StructTypeName myVar;
+ 
+myVar.item1 = ...
+
+
+Each type may be any type like int or char. Each struct subitem is called a data member. For a declared variable, each struct data member can be accessed using ".", known as a member access operator, sometimes called dot notation.
