@@ -1,0 +1,50 @@
+/* 10.6.1: A class with two inline member functions. 
+
+My favorite restaurants: 
+Central Deli -- 4
+Friends Cafe -- 5
+*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Restaurant {                          // Info about a restaurant
+   public:
+      void SetName(string restaurantName) { // Sets the restaurant's name
+         name = restaurantName;
+      }
+      void SetRating(int userRating) {      // Sets the rating (1-5, with 5 best)
+         rating = userRating;
+      }
+      void Print();                         // Prints name and rating on one line
+   
+   private:
+      string name;
+      int rating;
+};
+
+// Prints name and rating on one line
+void Restaurant::Print() {
+   cout << name << " -- " << rating << endl;
+}
+
+int main() {
+   Restaurant favLunchPlace;
+   Restaurant favDinnerPlace;
+   
+   favLunchPlace.SetName("Central Deli");
+   favLunchPlace.SetRating(4);
+   
+   favDinnerPlace.SetName("Friends Cafe");
+   favDinnerPlace.SetRating(5);
+   
+   cout << "My favorite restaurants: " << endl;
+   favLunchPlace.Print();
+   favDinnerPlace.Print();
+   
+   return 0;
+}
+
+/* Exception to variables being declared before used
+Normally, items like variables must be declared before being used, but this rule does not apply within a class definition. Ex: Above, SetRating() accesses rating, even though rating is declared a few lines after. This rule exception allows a class to have the desired form of a public region at the top and a private region at the bottom: A public inline member function can thus access a private data member even though that private data member is declared after the function. */

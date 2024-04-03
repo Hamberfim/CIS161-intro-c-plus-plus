@@ -1,0 +1,114 @@
+/* Inline member functions.
+What is the programs output */
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class City {
+   public:
+      void SetName(string cityName) {
+         name = cityName;
+      }
+      void SetPopulation(int cityPopulation) {
+         population = cityPopulation;
+      }
+      void Print() const;
+
+   private:
+      string name;
+      int population;
+};
+
+void City::Print() const {
+   cout << name << ". Population: " << population << endl;
+}
+
+int main() {
+   City cityToVisit;
+
+   cityToVisit.SetName("Lusaka");
+   cityToVisit.SetPopulation(1331260);
+
+   cityToVisit.Print();
+
+   return 0;
+}
+
+// Lusaka. Population: 1331260
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class City {
+   public:
+      void SetName(string cityName) {
+         name = cityName;
+      }
+      void SetPopulation(int cityPopulation) {
+         population = cityPopulation;
+      }
+      void Print() const;
+
+   private:
+      string name;
+      int population;
+};
+
+void City::Print() const {
+   cout << name << ". Population: " << population << endl;
+}
+
+int main() {
+   City cityToVisit;
+
+   cityToVisit.SetName("Beijing");
+   cityToVisit.SetPopulation(21542000);
+
+   cityToVisit.Print();
+
+   return 0;
+}
+// Beijing. Population: 21542000
+
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class State {
+   public:
+      void SetName(string stateName) {
+         name = stateName;
+      }
+      void SetCode(string stateCode) {
+         code = stateCode;
+      }
+      void Print() const {
+         cout << name << ": " << code << endl;   
+      }
+
+   private:
+      string name;
+      string code;
+};
+
+
+int main() {
+   State myState;
+
+   myState.SetName("New York");
+   myState.SetCode("NY");
+
+   myState.Print();
+
+   return 0;
+}
+// New York: NY
+ 

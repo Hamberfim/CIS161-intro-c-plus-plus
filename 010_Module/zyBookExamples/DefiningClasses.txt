@@ -1,0 +1,28 @@
+10.5 Defining a class
+Private data members
+In addition to public member functions, a class definition has private data members: variables that member functions can access but class users cannot. Private data members appear after the word "private:" in a class definition.
+
+10.5.1: Private data members.
+
+class Restaurant {                          // Keeps a user's review of a restaurant
+   public:                                    
+      void SetName(string restaurantName);  // Sets the restaurant's name        
+      void SetRating(int userRating);       // Sets the rating (1-5, with 5 best)    
+      void Print();                         // Prints name and rating on one line 
+   private:
+      string name;
+      int rating;
+};
+
+int main() {
+   Restaurant favLunchPlace;
+
+   favLunchPlace.rating = 5; // ERROR A class user cannot access a class' private data members; only the class' member functions can
+   ...
+}
+
+Defining a class' public member functions
+A programmer defining a class first declares member functions after the word "public:" in the class definition. A function declaration provides the function's name, return type, and parameter types, but not the function's statements.
+
+The programmer must also define each member function. A function definition provides a class name, return type, parameter names and types, and the function's statements. A member function definition has the class name and two colons (::), known as the scope resolution operator, preceding the function's name. A member function definition can access private data members.
+
