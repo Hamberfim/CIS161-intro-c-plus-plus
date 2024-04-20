@@ -1,0 +1,153 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Watch {
+public:
+   void SetHours(int watchHours) {
+      hours = watchHours;
+   }
+
+   void SetMins(int watchMins) {
+      mins = watchMins;
+   }
+
+   virtual void PrintItem() {
+      cout << hours << ":" << mins << endl;
+   }
+
+protected:
+   int hours;
+   int mins;
+};
+
+class SmartWatch : public Watch {
+public:
+   void SetPercentage(int watchPercentage) {
+      batteryPercentage = watchPercentage;
+   }
+
+   void PrintItem() {
+      cout << hours << ":" << mins << " " << batteryPercentage << "%" << endl;
+   }
+
+private:
+   int batteryPercentage;
+};
+
+int main() {
+   Watch* watch1;
+   SmartWatch* watch2;
+   Watch* watch3;
+
+   vector<Watch*> watchList;
+   unsigned int i;
+
+   watch1 = new Watch();
+   watch1->SetHours(4);
+   watch1->SetMins(11);
+   
+   watch2 = new SmartWatch();
+   watch2->SetHours(6);
+   watch2->SetMins(14);
+   watch2->SetPercentage(45);
+
+   watch3 = new Watch();
+   watch3->SetHours(3);
+   watch3->SetMins(40);
+   
+   watchList.push_back(watch1);
+   watchList.push_back(watch2);
+   watchList.push_back(watch3);
+
+   for (i = 0; i < watchList.size(); ++i) {
+      watchList.at(i)->PrintItem();
+   }
+   
+   return 0;
+}
+// 4:11
+// 6:14 45%
+// 3:40
+ 
+ 
+ #include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class Employee {
+public:
+   void SetName(string employeeName) {
+      name = employeeName;
+   }
+
+   virtual void PrintInfo() {
+      cout << name << endl;
+   }
+
+protected:
+   string name;
+};
+
+class Designer : public Employee {
+public:
+   void SetObject(string setObject) {
+      object = setObject;
+   }
+
+   void PrintInfo() {
+      cout << name << " designs " << object << endl;
+   }
+
+private:
+   string object;
+};
+
+class Professor : public Employee {
+public:
+   void SetSubject(string setSubject) {
+      subject = setSubject;
+   }
+
+   void PrintInfo() {
+      cout << name << " teaches " << subject << endl;
+   }
+
+private:
+   string subject;
+};
+
+int main() {
+   Employee* person1;
+   Designer* person2;
+   Professor* person3;
+
+   vector<Employee*> personList;
+   unsigned int i;
+
+   person1 = new Employee();
+   person1->SetName("Aja");
+
+   person2 = new Designer();
+   person2->SetName("Jose");
+   person2->SetObject("houses");
+
+   person3 = new Professor();
+   person3->SetName("Mary");
+   person3->SetSubject("Art");
+
+   personList.push_back(person3);
+   personList.push_back(person2);
+   personList.push_back(person1);
+
+   for (i = 0; i < personList.size(); ++i) {
+      personList.at(i)->PrintInfo();
+   }
+   
+   return 0;
+}
+// Mary teaches Art
+// Jose designs houses
+// Aja
+ 

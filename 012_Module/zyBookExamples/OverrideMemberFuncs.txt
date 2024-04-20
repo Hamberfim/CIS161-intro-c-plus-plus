@@ -1,0 +1,98 @@
+/* 
+Overriding vs. overloading
+Overriding differs from overloading. In overloading, functions with the same name must have different parameter types, number of parameters, or return values. In overriding, a derived class member function must have the same parameter types, number of parameters, and return value as the base class member function with the same name. Overloading is performed if derived and base member functions have different parameter types; the member function of the derived class does not hide the member function of the base class.
+
+12.3 Overriding member functions
+Overriding
+When a derived class defines a member function that has the same name and parameters as a base class's function, the member function is said to override the base class's function. The example below shows how the Restaurant's GetDescription() function overrides the Business's GetDescription() function.
+
+PARTICIPATION ACTIVITY
+12.3.1: Overriding member function example */
+
+class Business {
+   public:
+      ...
+      string GetDescription() const {
+         return name + " -- " + address;
+      }
+
+   protected:
+      string name;
+      string address;
+};
+
+class Restaurant : public Business {
+   public:
+      ...
+      string GetDescription() const {
+         return name + " -- " + address + 
+            "\n  Rating: " + to_string(rating);
+      }
+
+   private:
+      int rating;
+};
+
+int main() {
+   Restaurant favoritePlace;
+   favoritePlace.SetName("Friends Cafe");
+   favoritePlace.SetAddress("500 W 2nd Ave");
+   favoritePlace.SetRating(5);
+   cout << favoritePlace.GetDescription() << endl;
+
+   return 0;
+}
+// Friends Cafe -- 500 W 2nd Ave
+// Rating: 5
+
+/* Calling a base class function
+An overriding function can call the overridden function by prepending the base class name. Ex: Business::GetDescription().
+
+A common error is to leave off the prepended base class name when wanting to call the base class's function. Without the prepended base class name, the call to GetDescription() refers to itself (a recursive call), so GetDescription() would call itself, which would call itself, etc., never actually printing anything.
+
+Figure 12.3.1: Function calling overridden function of base class. */
+
+class Restaurant : public Business {
+
+   ...
+
+   string GetDescription() const {
+      return Business::GetDescription() + "\n  Rating: " + to_string(rating);
+   };
+
+   ...
+};
+
+/* 12.3.3: Override example.
+Choose the correct replacement for the missing code below so ProduceItem's PrintItem() overrides GenericItem's PrintItem(). */
+
+class GenericItem {
+   public:
+      ...
+      void PrintItem() const {
+         cout << itemName << " " << itemQuantity << endl;
+      }
+
+   __(A)__:  // private
+      string itemName;
+      int itemQuantity;
+};
+
+class ProduceItem : public GenericItem {
+   public:
+      void SetExpiration(string newDate) {
+         expirationDate = newDate;
+      }
+
+      string GetExpiration() const {
+         return expirationDate;
+      }
+
+      __(B)__ {  // void PrintItem() const
+         __(C)__;  // GenericItem::PrintItem()
+         cout << "  (expires " << expirationDate << ")" << endl;
+      }
+
+   private:
+      string expirationDate;
+};

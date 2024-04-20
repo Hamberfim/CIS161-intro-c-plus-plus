@@ -1,0 +1,92 @@
+/* 12.8 UML
+UML class diagrams
+The Unified Modeling Language (UML) is a language for software design that uses different types of diagrams to visualize the structure and behavior of programs. A structural diagram visualizes static elements of software, such as the attributes (variables) and operations (functions) used in the program. A behavioral diagram visualizes dynamic behavior of software, such as the flow of an algorithm.
+
+A UML class diagram is a structural diagram that can be used to visually model the classes of a computer program, including member variables and functions.
+
+PARTICIPATION ACTIVITY
+12.8.1: UML class diagrams show class names, members, types, and access.
+
+1
+
+2
+
+3
+
+4
+
+Private and public access is noted to the left of each member. A minus (-) indicates private and a plus (+) indicates public.
+Circle
+-  radius: double
+-  center: Point
+
++ ComputeArea(): double
++ ComputeArea(): double
+Class name
+Square
+-  size: double
+-  center: Point
+
+Attribute name
+Attribute type
+Method name
+Method return type
+Access
+Static Figure:
+There are two boxes. Each box has a header on the top.
+
+The box on the left contains the following:
+
+The header reads "Circle" and is highlighted in green which means "Circle" is a class name.
+
+The next line reads: "-  radius: double". 
+"-" is highlighted in grey which means "-" describes the access. 
+"radius:" is highlighted in yellow which means "radius:" is a member variable name.
+"double" is highlighted in blue which means "double" is a member variable type.
+
+The next line reads: "-  center: Point".
+"-" is highlighted in grey which means "-" describes the access.
+"center:" is highlighted in yellow which means "center:" is a member variable name.
+"Point" is highlighted in blue which means "Point" is a member variable type.
+
+The next line reads: "+ computeArea(): double".
+"+" is highlighted in grey which means "+" describes the access.
+"computeArea():" is highlighted in orange which means "computeArea()" is a function name.
+"double" is highlighted in purple which means "purple" is a function return type.
+
+The box on the right contains the following:
+
+The header reads "Square" and is highlighted in green which means "Square" is a class name.
+
+The next line reads: "-  size: double".
+"-" is highlighted in grey which means "-" describes the access.
+"size:" is highlighted in yellow which means "size:" is an attribute name.
+"double" is highlighted in blue which means "double" is an attribute type.
+
+The next line reads: "-  center: Point".
+"-" is highlighted in grey which means "-" describes the access.
+"center:" is highlighted in yellow which means "center:" is an attribute name.
+"Point" is highlighted in blue which means "Point" is an attribute type.
+
+The next line reads: "+ computeArea(): double".
+"+" is highlighted in grey which means "+" describes the access.
+"computeArea():" is highlighted in orange which means "computeArea()" is a function name.
+"double" is highlighted in purple which means "purple" is a function return type.
+
+Step 1: One box exists for each class. The class name is centered at the top.
+Two boxes appear, each representing a different class. Each box contains the class name, attributes, and methods. The class names are located at the top center of the box. This first is class is name Circle and the second is named Square. Both class names are highlighted in Green.
+
+Step 2: The middle section contains class attributes. Each of a C++ class's member variables is a UML class attribute. An attribute has a name followed by a colon and the type.
+The attributes for the classes are shown in the middle section of each class box. The attributes for the Circle class are “- radius: double” and “- center: Point". The attributes for the Square class are “- size: double” and “- center: Point". For both classes, the attributes names are highlighted in yellow, “radius”, “size” and “center”.  For both classes, the attribute types are highlighted in grey, “radius”, “size” and “center”.
+
+Step 3: The bottom section contains class operations. Each of a C++ class's member functions is a UML class operation. Each function's name and return type is listed similarly.
+The methods for the classes are shown in the bottom section of each class box. Both the method for the Circle class and Square class are the same, which is,  “ComputeArea(): double”. For both classes, the method name, “+ ComputeArea()”, is highlighted in orange and the method type, “double”, is highlighted in purple.
+
+Step 4: Private and public access is noted to the left of each member. A minus (-) indicates private and a plus (+) indicates public.
+All the attributes in both the Circle and Square class are private which is indicated with a minus (-) in front of each attribute. All the methods in both the Circle and Square class are public which is indicated with a plus (+) in front of each method. The plus (+) and minus (-) are highlighted in grey.
+
+Captions
+One box exists for each class. The class name is centered at the top.
+The middle section contains class attributes. Each of a C++ class's member variables is a UML class attribute. An attribute has a name followed by a colon and the type.
+The bottom section contains class operations. Each of a C++ class's member functions is a UML class operation. Each function's name and return type is listed similarly.
+Private and public access is noted to the left of each member. A minus (-) indicates private and a plus (+) indicates public. */

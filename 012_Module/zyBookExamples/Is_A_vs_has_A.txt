@@ -1,0 +1,48 @@
+/* 12.6 Is-a versus has-a relationships
+The concept of inheritance is commonly confused with the idea of composition. Composition is the idea that one object may be made up of other objects, such as a MotherInfo class being made up of objects like firstName (which may be a string object), childrenData (which may be a vector of ChildInfo objects), etc. Defining that MotherInfo class does not involve inheritance, but rather just composing the sub-objects in the class.
+
+Figure 12.6.1: Composition.
+The 'has-a' relationship. A MotherInfo object 'has a' string object and 'has a' vector of ChildInfo objects, but no inheritance is involved. */
+
+class ChildInfo {
+   string firstName;
+   string birthDate;
+   string schoolName;
+
+   ...
+};
+
+class MotherInfo {
+   string firstname;
+   string birthDate;
+   string spouseName;
+   vector<ChildInfo> childrenData;
+
+   ...
+};
+
+
+/* In contrast, a programmer may note that a mother is a kind of person, and all persons have a name and birthdate. So the programmer may decide to better organize the program by defining a PersonInfo class, and then by creating the MotherInfo class derived from PersonInfo, and likewise for the ChildInfo class.
+
+Figure 12.6.2: Inheritance.
+The 'is-a' relationship. A MotherInfo object 'is a' kind of PersonInfo. The MotherInfo class thus inherits from the PersonInfo class. Likewise for the ChildInfo class. */
+
+class PersonInfo {
+   string firstName;
+   string birthDate;
+
+   ...
+};
+
+class ChildInfo : public PersonInfo {
+   string schoolName;
+
+   ...
+};
+
+class MotherInfo : public PersonInfo {
+   string spouseName;
+   vector<ChildInfo> childrenData;
+
+   ...
+};

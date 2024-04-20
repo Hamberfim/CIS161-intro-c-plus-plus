@@ -1,0 +1,82 @@
+/* 
+Class definitions
+Separately, the keyword "public" in a class definition like class DerivedClass: public BaseClass {...} has a different purpose, relating to the kind of inheritance being carried out:
+
+public : "public-->public, protected-->protected" -- public members of BaseClass are accessible as public members of DerivedClass, and protected members of BaseClass are accessible as protected members of DerivedClass.
+protected : "public-->protected, protected-->protected" -- public and protected members of BaseClass are accessible as protected members of DerivedClass.
+private : "public-->private, protected-->private" -- public and protected members of BaseClass are accessible as private members of DerivedClass. Incidentally, if the specifier is omitted as in "class DerivedClass: BaseClass {...}", the default is private.
+
+Member access
+
+The members of a derived class have access to the public members of the base class, but not to the private members of the base class. This is logical—allowing access to all private members of a class merely by creating a derived class would circumvent the idea of private members.
+
+Recall that members of a class may have their access specified as public or private. A third access specifier is protected, which provides access to derived classes but not by anyone else. The following illustrates the implications of the protected access specifier.
+
+In the following example, the member called name is specified as protected and is accessible anywhere in the derived class. Note however that the name member is not accessible in main() -- the protected specifier only applies to derived classes; protected members are private to everyone else.
+
+Figure 12.2.2: Access specifiers -- Protected allows access by derived classes but not by others.
+Code contains intended errors to demonstrate protected accesses. 
+
+To make Restaurant's DisplayRestaurant() function work, we merely need to change the private members to protected members in class Business. Business's data members name and address thus become accessible to a derived class like Restaurant, but not elsewhere. A programmer may often want to make some members protected in a base class to allow access by derived classes, while making other members private to the base class.
+
+The following table summarizes access specifiers.
+
+Table 12.2.1: Access specifiers.
+Specifier	Description
+--------------------------------
+private		Accessible by self.
+protected	Accessible by self and derived classes.
+public		Accessible by self, derived classes, and everyone else.
+
+*/
+
+
+class Business {   
+   protected: // Members accessible by self and derived classes
+      string name;
+   
+   private:   // Members accessible only by self
+      string address;
+
+   public:    // Members accessible by anyone
+      void PrintMembers();
+};
+
+class Restaurant : public Business {
+   private:
+      int rating;
+
+   public:
+
+      ...
+
+      void DisplayRestaurant() {
+         // Attempted accesses
+         PrintMembers();             // OK
+         name = "Gyro Hero";         // OK    ("protected" above made this possible)
+         address = "5 Fifth St";     // ERROR
+      }
+
+      // Other class members ...
+
+};
+
+int main() {
+   ...
+   
+   Business business;
+   Restaurant restaurant;
+   
+   ...
+   
+   // Attempted accesses
+   business.PrintMembers();          // OK
+   business.name  = "Gyro Hero";     // ERROR (protected only applies to derived classes)
+   business.address = "5 Fifth St";  // ERROR
+   
+   restaurant.PrintMembers();         // OK
+   restaurant.name  = "Gyro Hero";    // ERROR
+   restaurant.rating = 5;  // ERROR
+   
+   return 0;
+}

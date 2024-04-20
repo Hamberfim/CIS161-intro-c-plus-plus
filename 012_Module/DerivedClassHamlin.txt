@@ -1,0 +1,73 @@
+/* 
+
+
+Write a base class Person and a derived class Student.
+
+A Person has a first name and a last name. A Student is a Person (it inherits) and it also has a student id.
+
+Write a Person class
+
+write a constructor
+write  accessors (getters)
+write  mutators (setters)
+Write a  Student class
+
+write constructors
+write accessors (getters)
+write mutators (setters)
+Write a main( ) to test your classes:
+
+create a Student object
+print values from the Student object
+
+*/
+
+#include <iostream>
+#include <string>
+
+// Base class
+class Person {
+public:
+    // Constructor
+    Person(std::string firstName, std::string lastName) : firstName(firstName), lastName(lastName) {}
+
+    // Accessors (getters)
+    std::string getFirstName() { return firstName; }
+    std::string getLastName() { return lastName; }
+
+    // Mutators (setters)
+    void setFirstName(std::string fn) { firstName = fn; }
+    void setLastName(std::string ln) { lastName = ln; }
+
+private:
+    std::string firstName;
+    std::string lastName;
+};
+
+// Derived class
+class Student : public Person {
+public:
+    // Constructor
+    Student(std::string firstName, std::string lastName, int id) : Person(firstName, lastName), id(id) {}
+
+    // Accessors (getters)
+    int getId() { return id; }
+
+    // Mutators (setters)
+    void setId(int id) { this->id = id; }
+
+private:
+    int id;
+};
+
+int main() {
+    // Create a Student object
+    Student student("John", "Doe", 123);
+
+    // Print values from the Student object
+    std::cout << "First Name: " << student.getFirstName() << std::endl;
+    std::cout << "Last Name: " << student.getLastName() << std::endl;
+    std::cout << "ID: " << student.getId() << std::endl;
+
+    return 0;
+}
