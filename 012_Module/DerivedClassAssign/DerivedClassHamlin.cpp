@@ -24,7 +24,6 @@
 #include <iostream>
 #include <string>
 
-using std::cerr;
 using std::cout;
 using std::endl;
 using std::string;
@@ -33,16 +32,16 @@ using std::string;
 class Person {
 public:
   // Constructor
-  Person(string firstName, string lastName)
-      : firstName(firstName), lastName(lastName) {}
+  Person(const string &fName, const string &lName)
+      : firstName(fName), lastName(lName) {}
 
   // Accessors (getters)
   string getFirstName() { return firstName; }
   string getLastName() { return lastName; }
 
   // Mutators (setters)
-  void setFirstName(string firstName) { firstName = firstName; }
-  void setLastName(string lastName) { lastName = lastName; }
+  void setFirstName(const string &set_fName) { firstName = set_fName; }
+  void setLastName(const string &set_lName) { lastName = set_lName; }
 
 private:
   string firstName;
@@ -53,14 +52,14 @@ private:
 class Student : public Person {
 public:
   // Constructor
-  Student(string firstName, string lastName, int studentId)
-      : Person(firstName, lastName), studentId(studentId) {}
+  Student(const string &fName, const string &lName, const int &stdId)
+      : Person(fName, lName), studentId(stdId) {}
 
   // Accessors (getters)
-  int getId() { return studentId; }
+  int getStudentId() { return studentId; }
 
   // Mutators (setters)
-  void setId(int studentId) { this->studentId = studentId; }
+  void setStudentId(const int &set_stdId) { studentId = set_stdId; }
 
 private:
   int studentId;
@@ -68,17 +67,38 @@ private:
 
 int main() {
   // test person base class
+  cout << "=== Test base class ===" << endl;
   Person person("Bill", "Williams");
+  cout << "Base Person: " << person.getFirstName() << " "
+       << person.getLastName() << "." << endl;
+
+  // test mutators
+  cout << "\n=== Test Mutators ===" << endl;
+  person.setFirstName("William");
+  person.setLastName("Willis");
+
   cout << "Base Person: " << person.getFirstName() << " "
        << person.getLastName() << "." << endl;
 
   // Create a Student object of the derived class
   Student student("Anthony", "Hamlin", 54321);
 
+  cout << "\n=== Derived Student Object ===" << endl;
   // Print values from the Student object
   cout << "Student's Name: " << student.getFirstName() << " "
        << student.getLastName() << "." << endl;
-  cout << "Student's ID: " << student.getId() << endl;
+  cout << "Student's ID: " << student.getStudentId() << endl;
+
+  // test mutators
+  cout << "\n=== Test Derived Mutators ===" << endl;
+  student.setFirstName("Tom");
+  student.setLastName("Thompson");
+  student.setStudentId(7890);
+
+  // Print values from the mutated Student object
+  cout << "Student's Name: " << student.getFirstName() << " "
+       << student.getLastName() << "." << endl;
+  cout << "Student's ID: " << student.getStudentId() << endl;
 
   return 0;
 }

@@ -24,7 +24,7 @@
  *      A constructor and appropriate accessors and mutators
  *      A print function that overrides the print function in the base class.
  *      The CargoShip class’s print function should display only the ship’s name
- * & the ship’s cargo capacity.
+ *      & the ship’s cargo capacity.
  *
  * Demonstrate the classes in a program that has a vector of Ship.
  *      Add (using push_back) CruiseShip and CargoShip objects onto the vector
@@ -36,7 +36,6 @@
 #include <string>
 #include <vector>
 
-using std::cerr;
 using std::cout;
 using std::endl;
 using std::string;
@@ -46,46 +45,45 @@ using std::vector;
 class Ship {
 public:
   // Constructor
-  Ship(string shipName, string yearBuilt)
-      : shipName(shipName), yearBuilt(yearBuilt) {}
+  Ship(const string &sName, const int &yearBlt)
+      : shipName(sName), yearBuilt(yearBlt) {}
 
   // Accessors (getters)
   string getName() { return shipName; }
-  string getYearBuilt() { return yearBuilt; }
+  int getYearBuilt() { return yearBuilt; }
 
   // Mutators (setters)
-  void setName(string shipName) { this->shipName = shipName; }
-  void setYearBuilt(string yearBuilt) { this->yearBuilt = yearBuilt; }
+  void setShipName(const string &sName) { shipName = sName; }
+  void setYearShipBuilt(const int &yearBlt) { yearBuilt = yearBlt; }
 
   // Virtual print function
   virtual void print() {
-    cout << "Name: " << shipName << ", Year Built: " << yearBuilt << endl;
+    cout << "The " << getName() << " ship was built in " << getYearBuilt()
+         << endl;
   }
 
 private:
   string shipName;
-  string yearBuilt;
+  int yearBuilt;
 };
 
 // Derived CruiseShip class
 class CruiseShip : public Ship {
 public:
   // Constructor
-  CruiseShip(string shipName, string yearBuilt, int maxPassengers)
-      : Ship(shipName, yearBuilt), maxPassengers(maxPassengers) {}
+  CruiseShip(const string &sName, const int &yearBlt, const int &mPassengers)
+      : Ship(sName, yearBlt), maxPassengers(mPassengers) {}
 
   // Accessors (getters)
   int getMaxPassengers() { return maxPassengers; }
 
   // Mutators (setters)
-  void setMaxPassengers(int maxPassengers) {
-    this->maxPassengers = maxPassengers;
-  }
+  void setMaxPassengers(const int &mPassengers) { maxPassengers = mPassengers; }
 
   // Print function
   void print() override {
-    cout << "Name: " << getName() << ", Max Passengers: " << maxPassengers
-         << endl;
+    cout << "The " << getName() << " cruise ship can hold a maximum of "
+         << getMaxPassengers() << " passengers." << endl;
   }
 
 private:
@@ -96,21 +94,19 @@ private:
 class CargoShip : public Ship {
 public:
   // Constructor
-  CargoShip(string shipName, string yearBuilt, int cargoCapacity)
-      : Ship(shipName, yearBuilt), cargoCapacity(cargoCapacity) {}
+  CargoShip(const string &sName, const int &yearBlt, const int &cargoCap)
+      : Ship(sName, yearBlt), cargoCapacity(cargoCap) {}
 
   // Accessors (getters)
   int getCargoCapacity() { return cargoCapacity; }
 
   // Mutators (setters)
-  void setCargoCapacity(int cargoCapacity) {
-    this->cargoCapacity = cargoCapacity;
-  }
+  void setCargoCapacity(const int &cargoCap) { cargoCapacity = cargoCap; }
 
   // Print function
   void print() override {
-    cout << "Name: " << getName() << ", Cargo Capacity: " << cargoCapacity
-         << endl;
+    cout << "The cargo ship " << getName() << " has a cargo capacity of "
+         << getCargoCapacity() << " tons." << endl;
   }
 
 private:
@@ -121,18 +117,50 @@ int main() {
   // Vector of Ship pointers
   vector<Ship *> ships;
 
-  // Add CruiseShip and CargoShip objects onto the vector of Ship
-  ships.push_back(new CruiseShip("Cruise1", "2000", 500));
-  ships.push_back(new CargoShip("Cargo1", "2005", 10000));
+  // test base Ship class
+  cout << "=== Test Base Ship Class ===" << endl;
+  Ship baseShip("Small Steam", 1905);
+  baseShip.print();
 
-  // Step through the vector, calling each object’s print function
+  // test base mutators
+  cout << "\n=== Test Base Ship Mutators ===" << endl;
+  baseShip.setShipName("Large Hull");
+  baseShip.setYearShipBuilt(1956);
+  baseShip.print();
+
+  // Test Hierarchies
+  cout << "\n=== Test Other Classes ===" << endl;
+  CruiseShip cruise("Little Debbie", 2005, 25);
+  cruise.print();
+  CargoShip cargo("Scarlet Barge", 1968, 10000);
+  cargo.print();
+
+  // test mutators
+  cout << "\n=== Test Other Class Mutators ===" << endl;
+  cruise.setShipName("Clark");
+  cruise.setYearShipBuilt(1946);
+  cruise.setMaxPassengers(150);
+  cruise.print();
+
+  cargo.setShipName("Standard Oil");
+  cargo.setYearShipBuilt(1972);
+  cargo.setCargoCapacity(200000);
+  cargo.print();
+
+  // Add CruiseShip and CargoShip objects onto the vector of Ship
+  CruiseShip tinyCruise("SS Minnow", 1964, 7);
+  ships.push_back(&tinyCruise);
+  CargoShip oldCargo("Rust Bucket", 1886, 1000);
+  ships.push_back(&oldCargo);
+
+  // syntax for inline object creation and push to vector
+  ships.push_back(new CruiseShip("Princess", 1999, 1500));
+  ships.push_back(new CargoShip("Valdez", 1985, 150000));
+
+  cout << "\n=== Vector Loop Ships ===" << endl;
+  // Loop through the vector, calling each object’s print function
   for (Ship *ship : ships) {
     ship->print();
-  }
-
-  // Clean up
-  for (Ship *ship : ships) {
-    delete ship;
   }
 
   return 0;
