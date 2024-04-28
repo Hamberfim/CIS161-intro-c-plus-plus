@@ -1,0 +1,55 @@
+someInt is located in memory at address 76, and valPointer points to someInt.
+The dereference operator * gets the value pointed to by valPointer, which is 5.
+Assigning *valPointer with a new value changes the value valPointer points to. The 5 changes to 10.
+Changing *valPointer also changes someInt. someInt is now 10.
+
+int main() {
+   int someInt;
+   int* valPointer;  
+
+   someInt = 5;
+   cout << "someInt address is " << &someInt << endl;
+
+   valPointer = &someInt;        
+   cout << "valPointer is " << valPointer << endl;
+
+   cout << "*valPointer is " << *valPointer << endl;
+
+   *valPointer = 10;   // Changes someInt to 10
+
+   cout << "someInt is " << someInt << endl;
+   cout << "*valPointer is " << *valPointer << endl;
+
+   return 0;
+}
+
+===========================================
+Checking to see if a pointer is null
+
+someInt is located in memory at address 76. valPointer is assigned nullptr, so valPointer is null.
+valPointer is passed to PrintValue(), so the valuePointer parameter is assigned nullptr.
+The if statement is true since valuePointer is null.
+valPointer points to someInt, so calling PrintValue() assigns valuePointer with the address 76.
+The if statement is false because valuePointer is no longer null. valuePointer points to the value 5, so 5 is output.
+
+void PrintValue(int* valuePointer) {
+   if (valuePointer == nullptr) {
+      cout << "Pointer is null" << endl;
+   }
+   else {
+      cout << *valuePointer << endl;
+   }
+}
+
+int main() {
+   int someInt = 5;
+   int* valPointer = nullptr;
+
+   PrintValue(valPointer);
+   valPointer = &someInt;        
+   PrintValue(valPointer);
+
+   return 0;
+}
+
+==========================================

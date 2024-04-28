@@ -1,0 +1,282 @@
+/* Deallocate memory for kitchenPaint using the delete operator. Note: Destructors, which use the "~" character, are explained in a later section. */
+#include <iostream>
+using namespace std;
+
+class PaintContainer {
+   public:
+      ~PaintContainer();
+      double gallonPaint;
+};
+
+PaintContainer::~PaintContainer() { // Covered in section on Destructors.
+   cout << "PaintContainer deallocated." << endl;
+}
+
+int main() {
+   PaintContainer* kitchenPaint;
+
+   kitchenPaint = new PaintContainer;
+   kitchenPaint->gallonPaint = 26.3;
+
+   /* Your solution goes here  */
+   delete kitchenPaint;
+
+   return 0;
+}
+
+==============================
+Operators: new, delete, and ->
+
+/* Two integers are read as the age and the weight of a Sheep object. Assign pointer mySheep with a new Sheep object using the age and the weight as arguments in that order.
+
+Ex: If the input is 10 52, then the output is:
+
+Sheep's age: 10
+Sheep's weight: 52 */
+#include <iostream>
+using namespace std;
+
+class Sheep {
+   public:
+      Sheep(int ageValue, int weightValue);
+      void Print();
+   private:
+      int age;
+      int weight;
+};
+Sheep::Sheep(int ageValue, int weightValue) {
+   age = ageValue;
+   weight = weightValue;
+}
+void Sheep::Print() {
+   cout << "Sheep's age: " << age << endl;
+   cout << "Sheep's weight: " << weight << endl;
+}
+
+int main() {
+   Sheep* mySheep = nullptr;
+   int ageValue;
+   int weightValue;
+
+   cin >> ageValue;
+   cin >> weightValue;
+   
+   /* Your code goes here */
+   mySheep = new Sheep(ageValue, weightValue);
+ 
+   mySheep->Print();
+   
+   return 0;
+}
+
+/* ageValue and weightValue are read from input. Declare and assign pointer myGoose with a new Goose object. Then, set myGoose's age and weight to ageValue and weightValue, respectively.
+
+Ex: if the input is 13.5 5.0, then the output is:
+
+Goose's age: 13.5
+Goose's weight: 5.0 */
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+class Goose {
+   public:
+      Goose();
+      void Print();
+
+      double age;
+      double weight;
+};
+Goose::Goose() {
+   age = 0.0;
+   weight = 0.0;
+}
+void Goose::Print() {
+   cout << "Goose's age: " << fixed << setprecision(1) << age << endl;
+   cout << "Goose's weight: " << fixed << setprecision(1) << weight <<  endl;
+}
+
+int main() {
+   double ageValue;
+   double weightValue;
+   
+   /* Additional variable declarations go here */
+   Goose* myGoose;
+   myGoose = new Goose();
+  
+   cin >> ageValue;
+   cin >> weightValue;
+  
+   /* Your code goes here */
+   myGoose->age = ageValue;
+   myGoose->weight = weightValue;
+   
+   myGoose->Print();
+   
+   return 0;
+}
+
+
+/* Read two integers as the age and the weight of a Sheep object. Declare and assign pointer mySheep with a new Sheep object using the age and the weight as arguments in that order. Then call mySheep's IncreaseAgeAndWeight() member function.
+
+Ex: If the input is 9 92, then the output is:
+
+Sheep's age and weight are increased.
+Sheep's age: 81
+Sheep's weight: 828 */
+#include <iostream>
+using namespace std;
+
+class Sheep {
+   public:
+      Sheep(int ageValue, int weightValue);
+      void IncreaseAgeAndWeight();
+      void Print();
+   private:
+      int age;
+      int weight;
+};
+Sheep::Sheep(int ageValue, int weightValue) {
+   age = ageValue;
+   weight = weightValue;
+}
+void Sheep::IncreaseAgeAndWeight() {
+	age = age * 9;
+	weight = weight * 9;
+   cout << "Sheep's age and weight are increased." << endl;
+}
+void Sheep::Print() {
+   cout << "Sheep's age: " << age << endl;
+   cout << "Sheep's weight: " << weight <<  endl;
+}
+
+
+int main() {
+   
+      /* Additional variable declarations go here */
+   int ageValue;
+   int weightValue;
+
+   /* Your code goes here */
+    cin >> ageValue;
+   cin >> weightValue;
+
+   // Declare and assign pointer mySheep with a new Sheep object
+   Sheep* mySheep = new Sheep(ageValue, weightValue);
+
+   // Call IncreaseAgeAndWeight() member function
+   mySheep->IncreaseAgeAndWeight();
+   
+   mySheep->Print();
+   
+   return 0;
+}
+
+
+/* Assign pointer mySheep with a new Sheep object. Call mySheep's Read() to read the object's fields. Then, call mySheep's Print() to output the values of the fields. Finally, delete mySheep.
+
+Ex: If the input is 10 74, then the output is:
+
+Sheep's age: 10
+Sheep's weight: 74
+Sheep with age 10 and weight 74 is deallocated. */
+#include <iostream>
+using namespace std;
+
+class Sheep {
+   public:
+      Sheep();
+      void Read();
+      void Print();
+      ~Sheep();
+   private:
+      int age;
+      int weight;
+};
+Sheep::Sheep() {
+   age = 0;
+   weight = 0;
+}
+void Sheep::Read() {
+   cin >> age;
+   cin >> weight;
+}  
+void Sheep::Print() {
+   cout << "Sheep's age: " << age << endl;
+   cout << "Sheep's weight: " << weight << endl;
+}  
+Sheep::~Sheep() { // Covered in section on Destructors.
+   cout << "Sheep with age " << age << " and weight " << weight << " is deallocated." <<  endl;
+}
+
+int main() {
+   Sheep* mySheep = nullptr;
+   
+   /* Your code goes here */
+   mySheep = new Sheep();
+   
+   mySheep->Read();
+   mySheep->Print();
+   
+   delete mySheep;
+
+   return 0;
+}
+
+/* Read an integer as the number of Dog objects. Assign myDogs with an array of that many Dog objects. For each object, call object's Read() followed by the object's Print().
+
+Ex: If the input is 1 7 11, then the output is:
+
+Dog's age: 7
+Dog's weight: 11
+Dog with age 7 and weight 11 is deallocated. */
+#include <iostream>
+using namespace std;
+
+class Dog {
+   public:
+      Dog();
+      void Read();
+      void Print();
+      ~Dog();
+   private:
+      int age;
+      int weight;
+};
+Dog::Dog() {
+   age = 0;
+   weight = 0;
+}
+void Dog::Read() {
+   cin >> age;
+   cin >> weight;
+}
+void Dog::Print() {
+   cout << "Dog's age: " << age << endl;
+   cout << "Dog's weight: " << weight << endl;
+}
+Dog::~Dog() { // Covered in section on Destructors.
+   cout << "Dog with age " << age << " and weight " << weight << " is deallocated." <<  endl;
+}
+
+int main() {
+   Dog* myDogs = nullptr;
+   int count;
+   int i;
+   
+   /* Your code goes here */
+   cin >> count;
+   
+   myDogs = new Dog[count];
+   
+   for (int i = 0; i < count; ++i) {
+      myDogs[i].Read();
+      myDogs[i].Print();
+   }
+   
+   delete[] myDogs;
+  
+   return 0;
+}
+
+

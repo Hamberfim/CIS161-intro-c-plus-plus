@@ -1,0 +1,83 @@
+The Point class contains two members, X and Y, both doubles.
+The new operator does 2 things. First, enough space is allocated for the Point object's 2 members, starting at memory address 46.
+Then the Point constructor is called, displaying a message and setting the X and Y values.
+The new operator returns a pointer to the allocated and initialized memory at address 46.
+
+#include <iostream>
+using namespace std;
+
+class Point {
+public:
+   Point();
+
+   double X;
+   double Y;
+};
+
+Point::Point() {
+   cout << "In Point default constructor" << endl;
+
+   X = 0;
+   Y = 0;
+}
+
+int main() {
+   Point* sample = new Point;
+   cout << "Exiting main()" << endl;
+   return 0;
+}
+
+======================================================
+The new operator can pass arguments to the constructor. The arguments must be in parentheses following the class name.
+The Point class contains 2 doubles, X and Y. The constructor has 2 parameters.
+"new Point" calls the constructor with no arguments. The default value of 0 is used for both numbers.
+point1 is a pointer to the allocated object that resides at address 60. point1 is dereferenced, and the Print() member function is called.
+"new Point(8, 9)" passes 8 and 9 as the constructor arguments.
+point2 points to the object at address 63. Print() is called for point2.
+
+#include <iostream>
+using namespace std;
+
+class Point {
+public:
+   Point(double xValue = 0, double yValue = 0);
+   void Print();
+
+   double X;
+   double Y;
+};
+
+Point:: Point(double xValue, double yValue) {
+   X = xValue;
+   Y = yValue;
+}
+
+void Point::Print() {
+   cout << "(" << X << ", ";
+   cout << Y << ")" << endl;
+}
+
+int main() {
+   Point* point1 = new Point;
+   (*point1).Print();
+
+   Point* point2 = new Point(8, 9);
+   (*point2).Print();
+
+   return 0;
+}
+
+===========================================================
+ Constructor arguments.
+
+Constructs the point (0, 0).
+new Point; and new Point(); are equivalent, both calling the constructor with no arguments. Default values of 0 are used for the xValue and yValue parameters.
+Correct
+Constructs the point (10, 0).
+10 is passed as the constructor's xValue parameter, and the default value of 0 is used for the yValue parameter.
+Correct
+Constructs the point (0, 10).
+0 is passed as the constructor's xValue parameter, and 10 is passed for the yValue parameter.
+Correct
+Causes a compiler error.
+The point class does not have a constructor with 3 parameters, so a compiler error occurs.

@@ -1,0 +1,75 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+   int someNumber;
+   int* numberPointer;
+
+   someNumber = 1;
+   numberPointer = &someNumber;
+
+   cout << someNumber << " " << *numberPointer << endl;
+
+   return 0;
+}
+// 1 1
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+   int someNumber;
+   int* numberPointer;
+
+   someNumber = 10;
+   numberPointer = &someNumber;
+
+   cout << someNumber << " " << *numberPointer << endl;
+
+   return 0;
+}
+//  10 10
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+   int someNumber;
+   int otherNumber;
+   int* numberPointer;
+
+   someNumber = 2;
+   otherNumber = 7;
+
+   numberPointer = &otherNumber;
+   *numberPointer = 10;
+
+   cout << someNumber << " " << otherNumber << endl;
+
+   return 0;
+}
+// 2 10
+
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+   int* numberPointer;
+   int someNumber;
+   int otherNumber;
+
+   numberPointer = &someNumber;
+
+   someNumber = 1;
+   otherNumber = 3;
+
+   cout << *numberPointer << endl;
+
+   return 0;
+}
+// 1

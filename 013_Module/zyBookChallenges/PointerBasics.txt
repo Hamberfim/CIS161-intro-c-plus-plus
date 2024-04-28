@@ -1,0 +1,118 @@
+/* Given variables id, score, and grade, declare and assign the following pointers:
+
+integer pointer idPointer is assigned with the address of id.
+double pointer scorePointer is assigned with the address of score.
+character pointer gradePointer is assigned with the address of grade.
+Ex: If the input is 144 91.5 D, then the output is:
+
+ID number: 144
+Score: 91.5
+Grade: D */
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+   int id;
+   double score;
+   char grade;
+   
+   /* Your code goes here */
+int* idPointer = &id;
+   double* scorePointer = &score;
+   char* gradePointer = &grade;
+   
+   cin >> id;
+   cin >> score;
+   cin >> grade;
+
+   cout << "ID number: " << *idPointer << endl;
+	cout << "Score: " << fixed << setprecision(1) << *scorePointer << endl;
+	cout << "Grade: " << *gradePointer << endl;
+
+   return 0;
+}
+
+/* Assign lengthPointer with the address of the smaller length. If the lengths are the same, then assign lengthPointer with nullptr.
+
+Ex: If the input is 56.5 33.0, then the output is:
+
+33.0 is the smaller length.
+lengthPointer points to length2. */
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+   double length1;
+   double length2;
+   double* lengthPointer;
+
+   cin >> length1;
+   cin >> length2;
+
+   /* Your code goes here */
+   if (length1 < length2) {
+      lengthPointer = &length1;
+   } else if (length2 < length1) {
+      lengthPointer = &length2;
+   }
+
+   if (lengthPointer == nullptr) {
+      cout << "The lengths are the same." << endl;
+   }
+   else {
+      cout << fixed << setprecision(1) << *lengthPointer << " is the smaller length." << endl;
+      
+      if (lengthPointer == &length1) {
+         cout << "lengthPointer points to length1." << endl;
+      }
+      if (lengthPointer == &length2) {
+         cout << "lengthPointer points to length2." << endl;
+      }
+   }
+
+   return 0;
+}
+
+/* Complete ChangeLevel() to output "levelPointer is null." if levelPointer is null. Otherwise, assign levelValue to the variable pointed to by levelPointer. End with a newline.
+
+Ex: If the input is Y G, then the output is:
+
+Level is G. */
+#include <iostream>
+using namespace std;
+
+void ChangeLevel(char* levelPointer, char levelValue) {
+
+   /* Your code goes here */
+   if (levelPointer == nullptr) {
+      cout << "levelPointer is null." << endl;
+   } else {
+      *levelPointer = levelValue;
+   }
+
+}
+
+int main() {
+   char level;
+   char* levelPointer;
+   char action;
+   char value;
+
+   level = 'Z';
+   cin >> action;
+   cin >> value;
+
+   if (action == 'Y') {
+      levelPointer = &level;
+   }
+   else {
+      levelPointer = nullptr;
+   }
+  
+   ChangeLevel(levelPointer, value);
+	cout << "Level is " << level << "." << endl;
+
+   return 0;
+}

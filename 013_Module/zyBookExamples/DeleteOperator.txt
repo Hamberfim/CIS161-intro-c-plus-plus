@@ -1,0 +1,43 @@
+The delete operator deallocates (or frees) a block of memory that was allocated with the new operator. The statement delete pointerVariable; deallocates a memory block pointed to by pointerVariable. If pointerVariable is null, delete has no effect.
+
+After the delete, the program should not attempt to dereference pointerVariable since pointerVariable points to a memory location that is no longer allocated for use by pointerVariable. Dereferencing a pointer whose memory has been deallocated is a common error and may cause strange program behavior that is difficult to debug. Ex: If pointerVariable points to deallocated memory that is later allocated to someVariable, changing *pointerVariable will mysteriously change someVariable. Calling delete with a pointer that wasn't previously set by the new operator has undefined behavior and is a logic error.
+
+point1 is allocated, and the X and Y members are displayed.
+Deleting point1 frees the memory for the X and Y members. point1 still points to address 87.
+Since point1 points to deallocated memory, attempting to use point1 after deletion is a logic error.
+
+int main() {
+   Point* point1 = new Point(73, 19);
+   cout << "X = " << point1->X << endl;
+   cout << "Y = " << point1->Y << endl;
+
+   delete point1;
+
+   // Error: can't use point1 after deletion
+   point1->Print();
+}
+
+==============================================================
+Allocating and deleting object arrays
+The new operator creates a dynamically allocated array of objects if the class name is followed by square brackets containing the array's length. A single, contiguous chunk of memory is allocated for the array, then the default constructor is called for each object in the array. A compiler error occurs if the class does not have a constructor that can take 0 arguments.
+
+The delete[] operator is used to free an array allocated with the new operator.
+
+The new operator allocates a contiguous chunk of memory for an array of 4 Point objects. The default constructor is called for each, setting X and Y to 0.
+Each point in the array is displayed.
+The entire array is freed with the delete[] operator.
+
+int main() {
+   // Allocate points
+   int pointCount = 4;
+   Point* manyPoints = new Point[pointCount];
+
+   // Display each point
+   for (int i = 0; i < pointCount; ++i)
+      manyPoints[i].Print();
+
+   // Free all points with one delete
+   delete[] manyPoints;
+
+   return 0;
+}

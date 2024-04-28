@@ -1,0 +1,30 @@
+/* If the input is negative, make numItemsPointer be null. Otherwise, make numItemsPointer point to numItems and multiply the value to which numItemsPointer points by 10. Ex: If the user enters 99, the output should be:
+Items: 990 */
+#include <iostream>
+using namespace std;
+
+int main() {
+   int* numItemsPointer;
+   int numItems;
+
+   cin >> numItems;
+
+   /* Your solution goes here  */
+   if (numItems < 0) {
+      numItemsPointer = nullptr;
+   }
+   else {
+      numItemsPointer = &numItems;
+      *numItemsPointer *= 10;
+   }
+
+   if (numItemsPointer == nullptr) {
+      cout << "Items is negative" << endl;
+   }
+   else {
+      cout << "Items: " << *numItemsPointer << endl;
+   }
+
+
+   return 0;
+}
