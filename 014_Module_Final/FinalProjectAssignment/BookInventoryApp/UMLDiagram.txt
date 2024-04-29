@@ -1,0 +1,39 @@
+Book (Base Class)
+-------------------------
+- title: string (The title of the book)
+- author: string (The author of the book)
+- pubDate: int (The publication date of the book)
+- isbn: string (The ISBN number of the book)
+- price: double (The price of the book)
+- quantity: int (The quantity of the book in stock)
+-------------------------
++ Book(title: string, author: string, pubDate: int, isbn: string, price: double, quantity: int): Constructor that initializes the book with the given title, author, publication date, ISBN, price, and quantity.
++ virtual ~Book(): Virtual destructor that cleans up the book object when it is no longer needed.
++ virtual display(): void: Virtual function for displaying book information. This function can be overridden by derived classes to display specific information about different types of books.
+
+
+Fiction (Derived from Book)
+-------------------------
+- genre: string (The genre of the fiction book)
+-------------------------
++ Fiction(title: string, author: string, pubDate: int, isbn: string, price: double, quantity: int, genre: string): Constructor that initializes the fiction book with the given title, author, publication date, ISBN, price, quantity, and genre.
++ ~Fiction(): Destructor that cleans up the fiction book object when it is no longer needed.
++ display(): void override: Overridden function for displaying fiction book information. This function displays the genre of the fiction book in addition to the information displayed by the base class display function.
+
+
+NonFiction (Derived from Book)
+-------------------------
+- subject: string (The subject of the non-fiction book)
+-------------------------
++ NonFiction(title: string, author: string, pubDate: int, isbn: string, price: double, quantity: int, subject: string): Constructor that initializes the non-fiction book with the given title, author, publication date, ISBN, price, quantity, and subject.
++ ~NonFiction(): Destructor that cleans up the non-fiction book object when it is no longer needed.
++ display(): void override: Overridden function for displaying non-fiction book information. This function displays the subject of the non-fiction book in addition to the information displayed by the base class display function.
+
+
+TextBook (Derived from Book)
+-------------------------
+- edition: int (The edition of the textbook)
+-------------------------
++ TextBook(title: string, author: string, pubDate: int, isbn: string, price: double, quantity: int, edition: int): Constructor that initializes the textbook with the given title, author, publication date, ISBN, price, quantity, and edition.
++ ~TextBook(): Destructor that cleans up the textbook object when it is no longer needed.
++ display(): void override: Overridden function for displaying textbook information. This function displays the edition of the textbook in addition to the information displayed by the base class display function.
