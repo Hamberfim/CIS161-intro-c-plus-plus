@@ -1,0 +1,38 @@
+Book Class(Base):
+classDiagram
+class Book {
+    - title: string
+    - authors: string
+    - publicationDate: int
+    - isbn: string
+    - retailPrice: double
+    - quantity: int
+    + Book(title: string, authors: string, publicationDate: int, isbn: string, retailPrice: double, quantity: int)
+    + virtual display()
+}
+
+
+Class TextBook(Derived from book):
+classDiagram
+class TextBook : public Book {
+    - subject: string
+    + TextBook(title: string, authors: string, publicationDate: int, isbn: string, retailPrice: double, quantity: int, subject: string)
+    + display()  // Override to include subject
+}
+
+
+Class NonFiction(Derived from book):
+classDiagram
+class NonFiction : public Book {
+    - genre: string
+    + NonFiction(title: string, authors: string, publicationDate: int, isbn: string, retailPrice: double, quantity: int, genre: string)
+    + display()  // Override to include genre
+}
+
+
+Class Fiction(Derived from book):
+classDiagram
+class Fiction : public Book {
+    + Fiction(title: string, authors: string, publicationDate: int, isbn: string, retailPrice: double, quantity: int)
+    + display()  // No additional display attributes
+}
