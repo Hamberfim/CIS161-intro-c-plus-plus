@@ -1,5 +1,5 @@
 # Variables to hold the cpp and h files
-CPP_FILES := BookInventory.cpp Book.cpp Fiction.cpp NonFiction.cpp TextBook.cpp
+CPP_FILES := main.cpp Book.cpp Fiction.cpp NonFiction.cpp TextBook.cpp
 H_FILES := Book.h Fiction.h NonFiction.h TextBook.h
 
 # Variable for the compiler flags
